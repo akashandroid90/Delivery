@@ -33,7 +33,7 @@ class ListViewModel @Inject constructor(
     }
 
     fun resetData() {
-        appRepository.getDataFromApi(true,0)
+        appRepository.getDataFromApi(true, 0)
     }
 
     fun retry() {
@@ -43,7 +43,7 @@ class ListViewModel @Inject constructor(
             if (data != null)
                 value = data.id + 1
         }
-        appRepository.getDataFromApi(false,value)
+        appRepository.getDataFromApi(false, value)
     }
 
     override fun onCleared() {

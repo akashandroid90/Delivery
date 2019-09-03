@@ -9,10 +9,10 @@ class DeliveryBoundryCallBack @Inject constructor(private val appRepository: Net
     PagedList.BoundaryCallback<DeliveriesData>() {
 
     override fun onZeroItemsLoaded() {
-        appRepository.getDataFromApi(true,0)
+        appRepository.getDataFromApi(true, 0)
     }
 
     override fun onItemAtEndLoaded(itemAtEnd: DeliveriesData) {
-        appRepository.getDataFromApi(false,itemAtEnd.id + 1)
+        appRepository.getDataFromApi(false, itemAtEnd.id + 1)
     }
 }

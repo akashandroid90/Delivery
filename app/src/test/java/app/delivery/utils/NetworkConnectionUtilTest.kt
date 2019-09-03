@@ -23,7 +23,7 @@ class NetworkConnectionUtilTest {
     }
 
     @Test
-    fun isInternetAvailable_notconnected() {
+    fun isInternetAvailable_not_connected() {
         val context = Mockito.mock(Context::class.java)
         mockConnection(false, context)
         Assert.assertTrue(!networkUtil.isInternetAvailable(context))

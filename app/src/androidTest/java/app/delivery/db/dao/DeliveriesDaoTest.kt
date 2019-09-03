@@ -62,6 +62,7 @@ class DeliveriesDaoTest {
         deliveryDao.insertAll(data)
         Assert.assertTrue(deliveryDao.getCount() > 0)
     }
+
     @Test
     @Throws(Exception::class)
     fun deleteByIdCondition() {

@@ -11,7 +11,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 /**
- * provides viewmodel and its factory instances
+ * provides view model and its factory instances
  */
 @Module
 abstract class ViewModelModule {

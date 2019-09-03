@@ -19,10 +19,8 @@ import javax.inject.Inject
 class ListAdapter @Inject constructor(private val inflater: LayoutInflater) :
     PagedListAdapter<DeliveriesData, RecyclerView.ViewHolder>(COMPARATOR), View.OnClickListener {
     private var dataState: DataState? = null
-    private val LISTVIEW = 1
-    private val NETWORKVIEW = 2
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == LISTVIEW)
+        if (viewType == AppConstant.VIEW_LIST)
             return ListViewHolder(
                 DataBindingUtil.inflate(
                     inflater,
@@ -43,8 +41,8 @@ class ListAdapter @Inject constructor(private val inflater: LayoutInflater) :
 
     override fun getItemViewType(position: Int): Int {
         return if (hasExtraRow() && position == itemCount - 1) {
-            return NETWORKVIEW
-        } else LISTVIEW
+            return AppConstant.VIEW_NETWORK
+        } else AppConstant.VIEW_LIST
     }
 
     override fun getItemCount(): Int {

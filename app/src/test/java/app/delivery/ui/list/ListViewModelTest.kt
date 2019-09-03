@@ -30,7 +30,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @RunWith(JUnit4::class)
-class ListlViewModelTest : ViewModelTest<ListViewModel>() {
+class ListViewModelTest : ViewModelTest<ListViewModel>() {
     @Mock
     lateinit var deliveriesDao: DeliveriesDao
     @Mock
@@ -81,14 +81,14 @@ class ListlViewModelTest : ViewModelTest<ListViewModel>() {
         data.mResult?.dataState?.value = state
         Assert.assertEquals(data.mResult?.dataState?.value, state)
 
-        state = DataState.NETWORKERROR
+        state = DataState.ERROR
         data.mResult?.dataState?.value = state
         Assert.assertEquals(data.mResult?.dataState?.value, state)
     }
 
     @Test
     fun testErrorMessage() {
-        val message = DataState.NETWORKERROR.name
+        val message = DataState.ERROR.name
         data.mResult?.errorMessage?.value = message
         Assert.assertEquals(data.mResult?.errorMessage?.value, message)
     }
@@ -110,7 +110,7 @@ class ListlViewModelTest : ViewModelTest<ListViewModel>() {
 
     @Test
     fun resetData() {
-        Mockito.`when`(appRepository.getDataFromApi(true,0)).then { mockResponseList() }
+        Mockito.`when`(appRepository.getDataFromApi(true, 0)).then { mockResponseList() }
         data.resetData()
         Assert.assertNotNull(data.mResult?.data?.value)
         Assert.assertTrue(data.mResult?.data?.value?.size!! > 0)
@@ -119,7 +119,7 @@ class ListlViewModelTest : ViewModelTest<ListViewModel>() {
 
     @Test
     fun retry() {
-        Mockito.`when`(appRepository.getDataFromApi(false,0)).then { mockResponseList() }
+        Mockito.`when`(appRepository.getDataFromApi(false, 0)).then { mockResponseList() }
         data.retry()
         Assert.assertNotNull(data.mResult?.data?.value)
         Assert.assertTrue(data.mResult?.data?.value?.size!! > 0)
@@ -129,7 +129,7 @@ class ListlViewModelTest : ViewModelTest<ListViewModel>() {
     @Test
     fun retry_withExisting_data() {
         mockResponseList()
-        Mockito.`when`(appRepository.getDataFromApi(false,0)).then { mockResponseList() }
+        Mockito.`when`(appRepository.getDataFromApi(false, 0)).then { mockResponseList() }
         data.retry()
         Assert.assertNotNull(data.mResult?.data?.value)
         Assert.assertTrue(data.mResult?.data?.value?.size!! > 0)

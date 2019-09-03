@@ -28,7 +28,7 @@ open class NetworkRepository @Inject constructor(
     /**
      *  Fetch delivery data from network and pass to {@link DbRepository} to perform database operations
      */
-    open fun getDataFromApi(isReset:Boolean,offset: Int) {
+    open fun getDataFromApi(isReset: Boolean, offset: Int) {
         if (isRequestInProgress) return
         if (networkConnectionUtil.isInternetAvailable(context)) {
             isRequestInProgress = true
@@ -43,9 +43,9 @@ open class NetworkRepository @Inject constructor(
                     if (response.isSuccessful) {
                         val body = response.body()
                         if (body is ArrayList<DeliveriesData> && body.size > 0)
-                            dbRepo.insertDeliveryData(isReset,body)
+                            dbRepo.insertDeliveryData(isReset, body)
                     } else {
-                        result?.dataState?.value = DataState.NETWORKERROR
+                        result?.dataState?.value = DataState.ERROR
                         result?.errorMessage?.value = response.errorBody()?.string()
                     }
                     isRequestInProgress = false
@@ -53,12 +53,12 @@ open class NetworkRepository @Inject constructor(
 
                 override fun onFailure(call: Call<ArrayList<DeliveriesData>>, t: Throwable) {
                     isRequestInProgress = false
-                    result?.dataState?.value = DataState.NETWORKERROR
+                    result?.dataState?.value = DataState.ERROR
                     result?.errorMessage?.value = (t.message as String)
                 }
             })
         } else {
-            result?.dataState?.value = DataState.NETWORKERROR
+            result?.dataState?.value = DataState.ERROR
             result?.errorMessage?.value = (context.getString(R.string.check_connection))
         }
     }
